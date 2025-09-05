@@ -1,5 +1,9 @@
 class Floor {
     static int floor(int[] arr, int target) {
+
+        if (target < arr[0]) {
+            return -1;
+        }
         int start = 0;
         int end = arr.length - 1;
         int ans = -1;
