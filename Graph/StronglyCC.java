@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class StronglyCC {
-    public static int koshaTRaju(int v, ArrayList<ArrayList<Integer>> graph) {
+    public static int koshaRaju(int v, ArrayList<ArrayList<Integer>> graph) {
         int Scc = 0;
         // filling the Stack;
         Stack<Integer> st = new Stack<>();
