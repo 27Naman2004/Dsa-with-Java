@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class CycleDetection {
+public class CycleDetectionDFS {
     public boolean dfs(List<List<Integer>> arr, boolean[] visit, int node, int parent) {
         visit[node] = true;
         for (int i : arr.get(node)) {
@@ -27,6 +27,8 @@ public class CycleDetection {
         }
         return false;
     }
+
+    
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -53,7 +55,7 @@ public class CycleDetection {
             graph.get(v).add(u); // undirected
         }
 
-        CycleDetection cd = new CycleDetection();
+        CycleDetectionDFS cd = new CycleDetectionDFS();
 
         if (cd.isCycle(graph)) {
             System.out.println("Cycle exists");
