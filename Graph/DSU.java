@@ -1,8 +1,6 @@
 class DSU {
-
     private int[] parent;
     private int[] rank;
-
     public DSU(int n) {
         parent = new int[n];
         rank = new int[n];
