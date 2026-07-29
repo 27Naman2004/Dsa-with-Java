@@ -39,8 +39,50 @@ public class Build{
 
         segTree[node] = segTree[2*node+1] + segTree[2*node+2];
     }
+
+    // Range Sum Query
+    public int rangeSumQuery(int[] segTree, int node, int start, int end, int L, int R){
+        // Not in Range of the query we wanted
+        if(start > R || end < L){
+            return 0; // No overlap
+        }
+        if(start >= L && end <= R){
+            return segTree[node]; // Total overlap
+        }
+        // Partial overlap
+        int mid = (start + end)/2;
+        int leftSum = rangeSumQuery(segTree, 2*node+1, start, mid, L, R);
+        int rightSum = rangeSumQuery(segTree, 2*node+2, mid+1, end, L, R);
+        return leftSum + rightSum;
+    }
+    // Max Segment Tree building function
+    public void buildMaxSegmentTree(int [] arr, int [] segTree, int node, int start, int end){
+        if(start == end){
+            segTree[node] = arr[start];
+            return;
+        }
+        int mid = (start+end)/2;
+        // 0 Base Indexing
+        buildMaxSegmentTree(arr, segTree, 2*node+1, start, mid);
+        buildMaxSegmentTree(arr, segTree, 2*node+2, mid+1, end);
+        segTree[node] = Math.max(segTree[2*node+1], segTree[2*node+2]);
+    }
+
+    // Minimum Segment Tree building function
+    public void buildMinSegmentTree(int [] arr, int [] segTree, int node, int start, int end){
+        if(start == end){
+            segTree[node] = arr[start];
+            return;
+        }
+        int mid = (start+end)/2;
+        // 0 Base Indexing
+        buildMinSegmentTree(arr, segTree, 2*node+1, start, mid);
+        buildMinSegmentTree(arr, segTree, 2*node+2, mid+1, end);
+        segTree[node] = Math.min(segTree[2*node+1], segTree[2*node+2]);
+    }
+    
     public static void main(String[] args){
-        int[] arr = {2, 3, 4, 6};
+        int[] arr = {1, 3,5,7,9,11};
         int n = arr.length;
         
         // Segment tree array size should be 4 * n to prevent out-of-bounds but can be 2 * n
